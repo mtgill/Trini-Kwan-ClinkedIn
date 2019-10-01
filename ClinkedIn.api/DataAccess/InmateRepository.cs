@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClinkedIn.Api.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "Atlanta",
                 CriminalInterest = CriminalInterest.Murder,
                 ReleaseDate = new DateTime(2030, 04, 20),
-                MyServices = new List<string>{"killing"}
+                MyServices = new List<string>{"Phone calls"}
             },
             new Inmate
             {
@@ -26,6 +27,7 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "Los Angeles",
                 CriminalInterest = CriminalInterest.Robbery,
                 ReleaseDate = new DateTime(2025, 06, 15),
+                MyServices = new List<string>{"Extra food"}
             },
             new Inmate
             {
@@ -34,6 +36,7 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "New York",
                 CriminalInterest = CriminalInterest.Assault,
                 ReleaseDate = new DateTime(2050, 03, 05),
+                MyServices = new List<string>{"Killing"}
             },
             new Inmate
             {
@@ -42,6 +45,7 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "Boston",
                 CriminalInterest = CriminalInterest.Robbery,
                 ReleaseDate = new DateTime(2022, 08, 22),
+                MyServices = new List<string>{"Alcohol"}
             },
 
         };
