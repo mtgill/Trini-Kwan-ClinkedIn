@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-public class Class1
+namespace ClinkedIn.Api.Commands
 {
-	public class AddInmateCommand
+    public class AddInmateCommand
     {
         public string Name { get; set; }
         public string Location { get; set; }
