@@ -13,6 +13,14 @@ namespace ClinkedIn.Api.Controllers
     [ApiController]
     public class InmateController : Controller
     {
+        [HttpGet("{inmateName}/allFriends")]
+        public ActionResult<IEnumerable<string>> GetFriendsByName(string inmateName)
+        {
+            var repo = new InmateRepository();
+            var allFriends = repo.GetAllFriends(inmateName);
+            return allFriends;
+        }
+
         // Start of AddFriend 
         [HttpPost("{name}/friends")]
         public IActionResult AddNewFriend(AddFriendCommand friendToAdd, string name)

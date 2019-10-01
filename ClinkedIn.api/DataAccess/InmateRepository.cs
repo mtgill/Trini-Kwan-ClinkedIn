@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ClinkedIn.Api.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ClinkedIn.Api.DataAccess
 {
@@ -49,6 +50,12 @@ namespace ClinkedIn.Api.DataAccess
             },
 
         };
+
+        public List<string> GetAllFriends(string inmateName)
+        {
+            var inmate = _inmates.FirstOrDefault(clinker => clinker.Name == inmateName);
+            return inmate.MyFriends;
+        }
 
         public List<string> AddNewFriend(string newFriendName, string name)
         {
