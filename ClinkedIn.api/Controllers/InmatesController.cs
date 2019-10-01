@@ -13,12 +13,13 @@ namespace ClinkedIn.Api.Controllers
     [ApiController]
     public class InmateController : Controller
     {
+        // Returns all friends for a given inmate
         [HttpGet("{inmateName}/allFriends")]
         public ActionResult<IEnumerable<string>> GetFriendsByName(string inmateName)
         {
             var repo = new InmateRepository();
             var allFriends = repo.GetAllFriends(inmateName);
-            return allFriends;
+            return Ok(allFriends);
         }
 
         // Start of AddFriend 
@@ -31,7 +32,6 @@ namespace ClinkedIn.Api.Controllers
 
             repo.AddNewFriend(friendName, name);
             return Created($"api/inmates/{friendToAdd.Name}", friendToAdd);
-            // return Ok();
         }
         
     }
