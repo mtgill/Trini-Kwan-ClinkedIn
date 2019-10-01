@@ -16,4 +16,12 @@ namespace ClinkedIn.Api.Models
         public List<Inmate> MyFriends {get; set; }
         public List<Inmate> MyEnemies { get; set; }
     }
+
+    public enum CriminalInterest
+    {
+        Robbery,
+        Assault,
+        Murder,
+        Bribery
+    }
 }

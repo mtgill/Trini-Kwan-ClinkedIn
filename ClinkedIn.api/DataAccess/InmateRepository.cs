@@ -39,7 +39,7 @@ namespace ClinkedIn.Api.DataAccess
                 Id = Guid.NewGuid(),
                 Name = "Greg",
                 Location = "Boston",
-                CriminalInterest = CriminalInterest.Bribery,
+                CriminalInterest = CriminalInterest.Robbery,
                 ReleaseDate = new DateTime(2022, 08, 22),
             },
 
