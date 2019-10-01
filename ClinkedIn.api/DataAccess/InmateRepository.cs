@@ -17,7 +17,7 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "Atlanta",
                 CriminalInterest = CriminalInterest.Murder,
                 ReleaseDate = new DateTime(2030, 04, 20),
-                MyServices = new List<string>{"Phone calls"}
+                MyServices = new List<string>{"Phone calls", "Internet data", "Cash transfer"}
             },
             new Inmate
             {
@@ -26,7 +26,7 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "Los Angeles",
                 CriminalInterest = CriminalInterest.Robbery,
                 ReleaseDate = new DateTime(2025, 06, 15),
-                MyServices = new List<string>{"Extra food"}
+                MyServices = new List<string>{"Extra food", "Plates", "Knives", "Forks"}
             },
             new Inmate
             {
@@ -35,7 +35,7 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "New York",
                 CriminalInterest = CriminalInterest.Assault,
                 ReleaseDate = new DateTime(2050, 03, 05),
-                MyServices = new List<string>{"Killing"}
+                MyServices = new List<string>{"Killing", "Ropes", "Belts", "Weapons"}
             },
             new Inmate
             {
@@ -44,7 +44,7 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "Boston",
                 CriminalInterest = CriminalInterest.Robbery,
                 ReleaseDate = new DateTime(2022, 08, 22),
-                MyServices = new List<string>{"Alcohol"}
+                MyServices = new List<string>{"Alcohol", "Weed", "Cigarettes", "Drugs"}
             },
 
         };
