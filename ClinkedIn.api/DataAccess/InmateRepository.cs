@@ -17,6 +17,7 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "Atlanta",
                 CriminalInterest = CriminalInterest.Murder,
                 ReleaseDate = new DateTime(2030, 04, 20),
+                MyServices = new List<string>{"killing"}
             },
             new Inmate
             {
