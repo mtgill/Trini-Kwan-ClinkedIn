@@ -50,9 +50,9 @@ namespace ClinkedIn.Api.DataAccess
 
         };
 
-        public List<string> AddNewFriend(string newFriendName, Guid id)
+        public List<string> AddNewFriend(string newFriendName, string name)
         {
-            var inmateAddingNewFriend = _inmates.FirstOrDefault(inmate => inmate.Id == id);
+            var inmateAddingNewFriend = _inmates.FirstOrDefault(inmate => inmate.Name == name);
             inmateAddingNewFriend.MyFriends.Add(newFriendName);
             return inmateAddingNewFriend.MyFriends;
         }

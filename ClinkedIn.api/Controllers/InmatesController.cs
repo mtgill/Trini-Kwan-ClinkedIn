@@ -14,15 +14,16 @@ namespace ClinkedIn.Api.Controllers
     public class InmateController : Controller
     {
         // Start of AddFriend 
-        [HttpPost("{id}")]
-        public IActionResult AddNewFriend(AddFriendCommand friendToAdd, Guid id)
+        [HttpPost("{name}/friends")]
+        public IActionResult AddNewFriend(AddFriendCommand friendToAdd, string name)
         {
             var repo = new InmateRepository();
             string friendName = friendToAdd.Name;
             var friendCriminalInterest = friendToAdd.CriminalInterest;
 
-            repo.AddNewFriend(friendName, id);
-            return Ok();
+            repo.AddNewFriend(friendName, name);
+            return Created($"api/inmates/{friendToAdd.Name}", friendToAdd);
+            // return Ok();
         }
         
     }

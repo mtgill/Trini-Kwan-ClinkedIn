@@ -13,7 +13,7 @@ namespace ClinkedIn.Api.Models
         public CriminalInterest CriminalInterest { get; set; }
         public DateTime ReleaseDate { get; set; }
         public List<string> MyServices { get; set; }
-        public List<string> MyFriends {get; set; }
+        public List<string> MyFriends { get; set; } = new List<string>();
         public List<Inmate> MyEnemies { get; set; }
     }
 
