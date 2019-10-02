@@ -1,4 +1,5 @@
 ﻿using ClinkedIn.Api.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,12 @@ namespace ClinkedIn.Api.DataAccess
             },
 
         };
+
+        public List<Inmate> Get(CriminalInterest criminalInterestToSearchFor)
+        {
+            var inmate = _inmates.FindAll(interest => interest.CriminalInterest == criminalInterestToSearchFor);
+            return inmate;
+        }
 
         public Inmate Add(Inmate newInmate)
         {
