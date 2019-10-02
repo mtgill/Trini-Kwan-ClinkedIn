@@ -52,12 +52,11 @@ namespace ClinkedIn.Api.DataAccess
 
         };
 
-<<<<<<< HEAD
         public List<Inmate> Get(CriminalInterest criminalInterestToSearchFor)
         {
-            var inmate = _inmates.FindAll(interest => interest.CriminalInterest == criminalInterestToSearchFor);
-            return inmate;
-=======
+            var inmates = _inmates.FindAll(interest => interest.CriminalInterest == criminalInterestToSearchFor);
+            return inmates;
+        }
         public List<string> GetAllFriends(string inmateName)
         {
             var inmate = _inmates.FirstOrDefault(clinker => clinker.Name == inmateName);
@@ -69,7 +68,6 @@ namespace ClinkedIn.Api.DataAccess
             var inmateAddingNewFriend = _inmates.FirstOrDefault(inmate => inmate.Name == name);
             inmateAddingNewFriend.MyFriends.Add(newFriendName);
             return inmateAddingNewFriend.MyFriends;
->>>>>>> master
         }
 
         public Inmate Add(Inmate newInmate)

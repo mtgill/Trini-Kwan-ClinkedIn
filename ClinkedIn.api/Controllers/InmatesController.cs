@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using ClinkedIn.Api.DataAccess;
 using ClinkedIn.Api.Models;
 using Microsoft.AspNetCore.Mvc;
-using ClinkedIn.Api.Models;
-using ClinkedIn.Api.DataAccess;
 using ClinkedIn.Api.Commands;
 
 namespace ClinkedIn.Api.Controllers
@@ -15,13 +13,12 @@ namespace ClinkedIn.Api.Controllers
     [ApiController]
     public class InmateController : Controller
     {
-<<<<<<< HEAD
         [HttpGet("{criminalInterestToSearchFor}")]
         public ActionResult<IEnumerable<Inmate>> GetByCriminalInterest(CriminalInterest criminalInterestToSearchFor)
         {
             var inmateRepo = new InmateRepository();
             return inmateRepo.Get(criminalInterestToSearchFor);
-=======
+        }
         // Returns all friends for a given inmate
         [HttpGet("{inmateName}/allFriends")]
         public ActionResult<IEnumerable<string>> GetFriendsByName(string inmateName)
@@ -29,7 +26,7 @@ namespace ClinkedIn.Api.Controllers
             var repo = new InmateRepository();
             var allFriends = repo.GetAllFriends(inmateName);
             return Ok(allFriends);
->>>>>>> master
+
         }
 
         // Start of AddFriend 
