@@ -9,8 +9,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ClinkedIn.Api.Controllers
 {
+    [Route("api/inmates")]
+    [ApiController]
+
     public class InmateController : Controller
     {
+        [HttpGet]
+        public ActionResult<IEnumerable<Inmate>> GetAllInmates()
+        {
+            var repo = new InmateRepository();
+
+            return repo.GetAll();
+        }
+
         [HttpPost]
         public IActionResult CreateInmate(AddInmateCommand newAddInmateCommand)
         {

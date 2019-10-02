@@ -49,6 +49,17 @@ namespace ClinkedIn.Api.DataAccess
 
         };
 
+        public List<Inmate> GetAll()
+        {
+            return _inmates;
+        }
+
+        public Inmate Get(string name)
+        {
+            var inmate = _inmates.FirstOrDefault(t => t.Name == name);
+            return inmate;
+        }
+
         public Inmate Add(Inmate newInmate)
         {
             _inmates.Add(newInmate);
