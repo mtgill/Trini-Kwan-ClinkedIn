@@ -9,6 +9,7 @@ namespace ClinkedIn.Api.DataAccess
 {
     public class InmateRepository
     {
+        public Dictionary<string,List<Enemy>> Enemies {get; private set;}
         static List<Inmate> _inmates = new List<Inmate>
         {
             new Inmate
@@ -85,6 +86,22 @@ namespace ClinkedIn.Api.DataAccess
             _inmates.Add(newInmate);
 
             return newInmate;
+        }
+
+        public List<Enemy> AddEnemy(Enemy enemy, string inmateName) 
+        {
+            if(!Enemies.ContainsKey(inmateName)) {
+                Enemies.Add(inmateName, new List<Enemy>(){});
+            }
+            Enemies[inmateName].Add(enemy);
+            return Enemies[inmateName]; 
+        }
+
+        public List<Enemy> GetAllEnemies(string name) {
+            if(Enemies.TryGetValue(name,out List<Enemy> enemies)) {
+                return enemies;
+            }
+            return null;
         }
     }
 }
