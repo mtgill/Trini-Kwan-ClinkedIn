@@ -74,6 +74,13 @@ namespace ClinkedIn.Api.DataAccess
             return inmateAddingNewFriend.MyFriends;
         }
 
+        public List<string> AddService(string newService, string inmateName)
+        {
+            var inmateAddingService = _inmates.FirstOrDefault(inmate => inmate.Name == inmateName);
+            inmateAddingService.MyServices.Add(newService);
+            return inmateAddingService.MyServices;
+        }
+
         public Inmate Add(Inmate newInmate)
         {
             _inmates.Add(newInmate);
