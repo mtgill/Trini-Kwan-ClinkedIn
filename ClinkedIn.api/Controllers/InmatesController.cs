@@ -83,8 +83,8 @@ namespace ClinkedIn.Api.Controllers
         public ActionResult<IEnumerable<string>> GetEnemyByName(string inmateName)
         {
             var repo = new InmateRepository();
-            var allFriends = repo.GetListEnemy(inmateName);
-            return Ok(allFriends);
+            var enemies = repo.GetAllEnemies(inmateName);
+            return Ok(enemies);
         }
 
 
