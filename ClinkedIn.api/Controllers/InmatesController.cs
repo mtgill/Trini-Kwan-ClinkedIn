@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-<<<<<<< HEAD
 using ClinkedIn.Api.DataAccess;
 using ClinkedIn.Api.Models;
 using Microsoft.AspNetCore.Mvc;
-=======
->>>>>>> master
 using ClinkedIn.Api.Commands;
-using ClinkedIn.Api.DataAccess;
-using ClinkedIn.Api.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ClinkedIn.Api.Controllers
 {
@@ -19,21 +13,20 @@ namespace ClinkedIn.Api.Controllers
     [ApiController]
     public class InmateController : Controller
     {
-<<<<<<< HEAD
         [HttpGet("{criminalInterestToSearchFor}")]
         public ActionResult<IEnumerable<Inmate>> GetByCriminalInterest(CriminalInterest criminalInterestToSearchFor)
         {
             var inmateRepo = new InmateRepository();
             return inmateRepo.Get(criminalInterestToSearchFor);
         }
-=======
-            [HttpGet]
-            public ActionResult<IEnumerable<Inmate>> GetAllInmates()
-            {
-                var repo = new InmateRepository();
 
-                return repo.GetAll();
-            }
+        [HttpGet]
+        public ActionResult<IEnumerable<Inmate>> GetAllInmates()
+        {
+            var repo = new InmateRepository();
+
+            return repo.GetAll();
+        }
 
         [HttpPost]
         public IActionResult CreateInmate(AddInmateCommand newAddInmateCommand)
@@ -54,7 +47,6 @@ namespace ClinkedIn.Api.Controllers
             return Created($"api/inmates/{inmateThatGotCreated.Name}", inmateThatGotCreated);
         }
 
->>>>>>> master
         // Returns all friends for a given inmate
         [HttpGet("{inmateName}/allFriends")]
         public ActionResult<IEnumerable<string>> GetFriendsByName(string inmateName)
