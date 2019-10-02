@@ -12,9 +12,9 @@ namespace ClinkedIn.Api.Models
         public string Location { get; set; }
         public CriminalInterest CriminalInterest { get; set; }
         public DateTime ReleaseDate { get; set; }
-        public List<string> MyServices { get; set; }
-        public List<Inmate> MyFriends {get; set; }
-        public List<Inmate> MyEnemies { get; set; }
+        public List<string> MyServices { get; set; } = new List<string>();
+        public List<string> MyFriends { get; set; } = new List<string>();
+        public List<string> MyEnemies { get; set; } = new List<string>();
     }
 
     public enum CriminalInterest
