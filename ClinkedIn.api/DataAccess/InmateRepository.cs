@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ClinkedIn.Api.DataAccess
 {
@@ -17,7 +18,7 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "Atlanta",
                 CriminalInterest = CriminalInterest.Murder,
                 ReleaseDate = new DateTime(2030, 04, 20),
-                MyServices = new List<string>{"Phone calls"}
+                MyServices = new List<string>{"Phone calls", "Internet data", "Cash transfer"}
             },
             new Inmate
             {
@@ -26,7 +27,7 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "Los Angeles",
                 CriminalInterest = CriminalInterest.Robbery,
                 ReleaseDate = new DateTime(2025, 06, 15),
-                MyServices = new List<string>{"Extra food"}
+                MyServices = new List<string>{"Extra food", "Plates", "Knives", "Forks"}
             },
             new Inmate
             {
@@ -35,7 +36,7 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "New York",
                 CriminalInterest = CriminalInterest.Assault,
                 ReleaseDate = new DateTime(2050, 03, 05),
-                MyServices = new List<string>{"Killing"}
+                MyServices = new List<string>{"Killing", "Ropes", "Belts", "Weapons"}
             },
             new Inmate
             {
@@ -44,7 +45,7 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "Boston",
                 CriminalInterest = CriminalInterest.Robbery,
                 ReleaseDate = new DateTime(2022, 08, 22),
-                MyServices = new List<string>{"Alcohol"}
+                MyServices = new List<string>{"Alcohol", "Weed", "Cigarettes", "Drugs"}
             },
 
         };
@@ -58,6 +59,19 @@ namespace ClinkedIn.Api.DataAccess
         {
             var inmate = _inmates.FirstOrDefault(t => t.Name == name);
             return inmate;
+        }
+
+        public List<string> GetAllFriends(string inmateName)
+        {
+            var inmate = _inmates.FirstOrDefault(clinker => clinker.Name == inmateName);
+            return inmate.MyFriends;
+        }
+
+        public List<string> AddNewFriend(string newFriendName, string name)
+        {
+            var inmateAddingNewFriend = _inmates.FirstOrDefault(inmate => inmate.Name == name);
+            inmateAddingNewFriend.MyFriends.Add(newFriendName);
+            return inmateAddingNewFriend.MyFriends;
         }
 
         public Inmate Add(Inmate newInmate)
