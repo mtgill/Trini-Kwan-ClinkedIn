@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ClinkedIn.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClinkedIn.Api.DataAccess
@@ -52,11 +51,25 @@ namespace ClinkedIn.Api.DataAccess
 
         };
 
+<<<<<<< HEAD
         public List<Inmate> Get(CriminalInterest criminalInterestToSearchFor)
         {
             var inmates = _inmates.FindAll(interest => interest.CriminalInterest == criminalInterestToSearchFor);
             return inmates;
         }
+=======
+        public List<Inmate> GetAll()
+        {
+            return _inmates;
+        }
+
+        public Inmate Get(string name)
+        {
+            var inmate = _inmates.FirstOrDefault(t => t.Name == name);
+            return inmate;
+        }
+
+>>>>>>> master
         public List<string> GetAllFriends(string inmateName)
         {
             var inmate = _inmates.FirstOrDefault(clinker => clinker.Name == inmateName);
