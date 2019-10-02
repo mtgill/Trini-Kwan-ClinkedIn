@@ -7,5 +7,6 @@ namespace ClinkedIn.Api.Commands
 {
     public class AddServiceCommand
     {
+        public string Service { get; set; }
     }
 }

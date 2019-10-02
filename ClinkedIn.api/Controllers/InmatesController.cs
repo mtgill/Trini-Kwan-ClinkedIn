@@ -69,10 +69,23 @@ namespace ClinkedIn.Api.Controllers
             return Created($"api/inmates/{friendToAdd.Name}", friendToAdd);
         }
 
+        [HttpGet]
+        [HttpGet("{inmateName}/services")]
+        public ActionResult<List<string>> GetServicesByInmate(string inmateName)
+        {
+            var repo = new InmateRepository();
+            var allServices = repo.GetServices(inmateName);
+            return Ok(allServices);
+
+        }
+
         [HttpPost("{inmateName}/services")]
         public IActionResult AddService(AddServiceCommand serviceToAdd, string inmateName)
         {
             var repo = new InmateRepository();
+
+            repo.AddService(serviceToAdd.Service, inmateName);
+            return Created($"api/inmates/{inmateName}/services/{serviceToAdd}", serviceToAdd);
             
         }
         
