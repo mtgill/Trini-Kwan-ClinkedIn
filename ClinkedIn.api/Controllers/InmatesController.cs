@@ -13,6 +13,40 @@ namespace ClinkedIn.Api.Controllers
     [ApiController]
     public class InmateController : Controller
     {
+        [HttpGet("{criminalInterestToSearchFor}")]
+        public ActionResult<IEnumerable<Inmate>> GetByCriminalInterest(CriminalInterest criminalInterestToSearchFor)
+        {
+            var inmateRepo = new InmateRepository();
+            return inmateRepo.Get(criminalInterestToSearchFor);
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Inmate>> GetAllInmates()
+        {
+            var repo = new InmateRepository();
+
+            return repo.GetAll();
+        }
+
+        [HttpPost]
+        public IActionResult CreateInmate(AddInmateCommand newAddInmateCommand)
+        {
+            var newInmate = new Inmate
+            {
+                Id = Guid.NewGuid(),
+                Name = newAddInmateCommand.Name,
+                Location = newAddInmateCommand.Location,
+                CriminalInterest = newAddInmateCommand.CriminalInterest,
+                ReleaseDate = newAddInmateCommand.ReleaseDate,
+            };
+
+            var repo = new InmateRepository();
+
+            var inmateThatGotCreated = repo.Add(newInmate);
+
+            return Created($"api/inmates/{inmateThatGotCreated.Name}", inmateThatGotCreated);
+        }
+
         // Returns all friends for a given inmate
         [HttpGet("{inmateName}/allFriends")]
         public ActionResult<IEnumerable<string>> GetFriendsByName(string inmateName)
@@ -20,6 +54,7 @@ namespace ClinkedIn.Api.Controllers
             var repo = new InmateRepository();
             var allFriends = repo.GetAllFriends(inmateName);
             return Ok(allFriends);
+
         }
 
         // Start of AddFriend 
@@ -35,4 +70,6 @@ namespace ClinkedIn.Api.Controllers
         }
         
     }
+
+    
 }
