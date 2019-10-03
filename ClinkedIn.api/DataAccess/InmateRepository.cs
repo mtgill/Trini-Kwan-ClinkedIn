@@ -75,6 +75,8 @@ namespace ClinkedIn.Api.DataAccess
             return inmate;
         }
 
+        //This functions loops through the inmates field and searches for the friend,
+        //then it returns a list of that friend's friends
         internal List<IEnumerable> GetFriends(string friendName)
         {
             var friendFriends = new List<IEnumerable>();

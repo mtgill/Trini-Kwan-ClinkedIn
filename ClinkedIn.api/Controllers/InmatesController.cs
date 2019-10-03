@@ -68,7 +68,7 @@ namespace ClinkedIn.Api.Controllers
             repo.AddNewFriend(friendName, name);
             return Created($"api/inmates/{friendToAdd.Name}", friendToAdd);
         }
-
+        // Returns a list of inmates friend's friends
         [HttpGet("{MyFriend}/friends")]
         public ActionResult<IEnumerable<string>> GetMyFriendFriends(string MyFriend)
         {
