@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ClinkedIn.Api.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ClinkedIn.Api.DataAccess
 {
@@ -75,11 +73,25 @@ namespace ClinkedIn.Api.DataAccess
             return inmate.MyFriends;
         }
 
+        public List<string> GetServices(string inmateName)
+        {
+            var inmate = _inmates.FirstOrDefault(person => person.Name == inmateName);
+            return inmate.MyServices;
+
+        }
+
         public List<string> AddNewFriend(string newFriendName, string name)
         {
             var inmateAddingNewFriend = _inmates.FirstOrDefault(inmate => inmate.Name == name);
             inmateAddingNewFriend.MyFriends.Add(newFriendName);
             return inmateAddingNewFriend.MyFriends;
+        }
+
+        public List<string> AddService(string newService, string inmateName)
+        {
+            var inmateAddingService = _inmates.FirstOrDefault(inmate => inmate.Name == inmateName);
+            inmateAddingService.MyServices.Add(newService);
+            return inmateAddingService.MyServices;
         }
 
         public Inmate Add(Inmate newInmate)
