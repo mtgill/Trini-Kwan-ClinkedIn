@@ -68,6 +68,14 @@ namespace ClinkedIn.Api.Controllers
             repo.AddNewFriend(friendName, name);
             return Created($"api/inmates/{friendToAdd.Name}", friendToAdd);
         }
+        
+        // Returns a list of inmates friend's friends
+        [HttpGet("{MyFriend}/friends")]
+        public ActionResult<IEnumerable<string>> GetMyFriendFriends(string MyFriend)
+        {
+            var inmateRepo = new InmateRepository();
+            var friends = inmateRepo.GetFriends(MyFriend);
+            return Ok(friends);
 
         [HttpGet("{inmateName}/services")]
         public ActionResult<List<string>> GetServicesByInmate(string inmateName)
@@ -84,8 +92,7 @@ namespace ClinkedIn.Api.Controllers
             var repo = new InmateRepository();
 
             repo.AddService(serviceToAdd.Service, inmateName);
-            return Created($"api/inmates/{inmateName}/services/{serviceToAdd}", serviceToAdd);
-            
+            return Created($"api/inmates/{inmateName}/services/{serviceToAdd}", serviceToAdd);        
         }
         
         // Returns all enemys for a given inmate

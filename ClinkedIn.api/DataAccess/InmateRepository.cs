@@ -4,11 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ClinkedIn.Api.Commands;
+using System.Collections;
 
 namespace ClinkedIn.Api.DataAccess
 {
     public class InmateRepository
     {
+
         static List<Inmate> _inmates = new List<Inmate>
         {
             new Inmate
@@ -18,7 +21,8 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "Atlanta",
                 CriminalInterest = CriminalInterest.Murder,
                 ReleaseDate = new DateTime(2030, 04, 20),
-                MyServices = new List<string>{"Phone calls", "Internet data", "Cash transfer"}
+                MyServices = new List<string>{"Phone calls", "Internet data", "Cash transfer"},
+                MyFriends = new List<string>{"Adam", "Martin", "Emily"}
             },
             new Inmate
             {
@@ -27,7 +31,8 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "Los Angeles",
                 CriminalInterest = CriminalInterest.Robbery,
                 ReleaseDate = new DateTime(2025, 06, 15),
-                MyServices = new List<string>{"Extra food", "Plates", "Knives", "Forks"}
+                MyServices = new List<string>{"Extra food", "Plates", "Knives", "Forks"},
+                MyFriends = new List<string>{"Nathan", "Greg", "Matt"}
             },
             new Inmate
             {
@@ -36,7 +41,8 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "New York",
                 CriminalInterest = CriminalInterest.Assault,
                 ReleaseDate = new DateTime(2050, 03, 05),
-                MyServices = new List<string>{"Killing", "Ropes", "Belts", "Weapons"}
+                MyServices = new List<string>{"Killing", "Ropes", "Belts", "Weapons"},
+                MyFriends = new List<string>{"Mark", "Nathan", "Matt"}
             },
             new Inmate
             {
@@ -45,10 +51,12 @@ namespace ClinkedIn.Api.DataAccess
                 Location = "Boston",
                 CriminalInterest = CriminalInterest.Robbery,
                 ReleaseDate = new DateTime(2022, 08, 22),
-                MyServices = new List<string>{"Alcohol", "Weed", "Cigarettes", "Drugs"}
+                MyServices = new List<string>{"Alcohol", "Weed", "Cigarettes", "Drugs"},
+                MyFriends = new List<string>{"Adam", "Martin", "Nathan", "Mark", "Emily"}
             },
 
         };
+
 
         public List<Inmate> Get(CriminalInterest criminalInterestToSearchFor)
         {
@@ -65,6 +73,28 @@ namespace ClinkedIn.Api.DataAccess
         {
             var inmate = _inmates.FirstOrDefault(t => t.Name == name);
             return inmate;
+        }
+
+        //This functions loops through the inmates field and searches for the friend,
+        //then it returns a list of that friend's friends
+        internal List<IEnumerable> GetFriends(string friendName)
+        {
+            var friendFriends = new List<IEnumerable>();
+           foreach( var inmate in _inmates)
+            {
+                foreach(var friend in inmate.MyFriends)
+                {
+                    if (inmate.MyFriends.Contains(friendName))
+                    {
+                        var myFriendFriends = _inmates.Where(s => s.Name == friendName).Select(z => z.MyFriends);
+                        friendFriends.Add(myFriendFriends);
+                        break;
+                    }
+                    break;
+                }
+                break;
+            }
+            return friendFriends;
         }
 
         public List<string> GetAllFriends(string inmateName)
