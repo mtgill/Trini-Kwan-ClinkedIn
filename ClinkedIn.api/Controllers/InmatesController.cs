@@ -69,7 +69,6 @@ namespace ClinkedIn.Api.Controllers
             return Created($"api/inmates/{friendToAdd.Name}", friendToAdd);
         }
 
-        [HttpGet]
         [HttpGet("{inmateName}/services")]
         public ActionResult<List<string>> GetServicesByInmate(string inmateName)
         {
