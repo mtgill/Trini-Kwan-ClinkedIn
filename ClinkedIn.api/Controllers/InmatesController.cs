@@ -20,6 +20,14 @@ namespace ClinkedIn.Api.Controllers
             return inmateRepo.Get(criminalInterestToSearchFor);
         }
 
+        [HttpGet("{name}/daysUntilRelease")]
+        public ActionResult<int> GetDaysUntilRelease(string name)
+        {
+            var repo = new InmateRepository();
+
+            return Ok(repo.GetDaysUntilRelease(name));
+        }
+
         [HttpGet]
         public ActionResult<IEnumerable<Inmate>> GetAllInmates()
         {
