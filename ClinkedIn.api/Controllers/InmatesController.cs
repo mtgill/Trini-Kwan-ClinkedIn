@@ -28,14 +28,6 @@ namespace ClinkedIn.Api.Controllers
             return repo.GetAll();
         }
 
-        [HttpGet("{name}/daysUntilRelease")]
-        public ActionResult<int> GetDaysUntilRelease(string name)
-        {
-            var repo = new InmateRepository();
-
-            return Ok(repo.GetDaysUntilRelease(name));
-        }
-
         [HttpPost]
         public IActionResult CreateInmate(AddInmateCommand newAddInmateCommand)
         {
@@ -77,8 +69,6 @@ namespace ClinkedIn.Api.Controllers
             return Created($"api/inmates/{friendToAdd.Name}", friendToAdd);
         }
 
-
-        
         // Returns a list of inmates friend's friends
         [HttpGet("{MyFriend}/friends")]
         public ActionResult<IEnumerable<string>> GetMyFriendFriends(string MyFriend)
@@ -86,6 +76,7 @@ namespace ClinkedIn.Api.Controllers
             var inmateRepo = new InmateRepository();
             var friends = inmateRepo.GetFriends(MyFriend);
             return Ok(friends);
+        }
 
         [HttpGet("{inmateName}/services")]
         public ActionResult<List<string>> GetServicesByInmate(string inmateName)

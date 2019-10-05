@@ -57,7 +57,6 @@ namespace ClinkedIn.Api.DataAccess
 
         };
 
-<<<<<<< HEAD
         internal ActionResult<int> GetDaysUntilRelease(string name)
         {
             var inmate = _inmates.FirstOrDefault(clinker => clinker.Name == name);
@@ -67,8 +66,6 @@ namespace ClinkedIn.Api.DataAccess
 
             return daysUntilRelease.Days;
         }
-=======
->>>>>>> master
 
         public List<Inmate> Get(CriminalInterest criminalInterestToSearchFor)
         {
