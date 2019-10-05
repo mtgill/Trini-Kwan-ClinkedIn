@@ -68,6 +68,7 @@ namespace ClinkedIn.Api.Controllers
             repo.AddNewFriend(friendName, name);
             return Created($"api/inmates/{friendToAdd.Name}", friendToAdd);
         }
+        
         // Returns a list of inmates friend's friends
         [HttpGet("{MyFriend}/friends")]
         public ActionResult<IEnumerable<string>> GetMyFriendFriends(string MyFriend)
@@ -75,9 +76,47 @@ namespace ClinkedIn.Api.Controllers
             var inmateRepo = new InmateRepository();
             var friends = inmateRepo.GetFriends(MyFriend);
             return Ok(friends);
+
+        [HttpGet("{inmateName}/services")]
+        public ActionResult<List<string>> GetServicesByInmate(string inmateName)
+        {
+            var repo = new InmateRepository();
+            var allServices = repo.GetServices(inmateName);
+            return Ok(allServices);
+
+        }
+
+        [HttpPost("{inmateName}/services")]
+        public IActionResult AddService(AddServiceCommand serviceToAdd, string inmateName)
+        {
+            var repo = new InmateRepository();
+
+            repo.AddService(serviceToAdd.Service, inmateName);
+            return Created($"api/inmates/{inmateName}/services/{serviceToAdd}", serviceToAdd);        
         }
         
+        // Returns all enemys for a given inmate
+        [HttpGet("{inmateName}/allEnemys")]
+        public ActionResult<IEnumerable<string>> GetEnemysByName(string inmateName)
+        {
+            var repo = new InmateRepository();
+            var allEnemys = repo.GetAllEnemys(inmateName);
+            return Ok(allEnemys);
+
+        }
+
+        // Start of AddEnemy 
+        [HttpPost("{name}/enemys")]
+        public IActionResult AddNewEnemy(AddEnemyCommand enemyToAdd, string name)
+        {
+            var repo = new InmateRepository();
+            string enemyName = enemyToAdd.Name;
+            var enemyCriminalInterest = enemyToAdd.CriminalInterest;
+
+            repo.AddNewEnemy(enemyName, name);
+            return Created($"api/inmates/{enemyToAdd.Name}", enemyToAdd);
+        }
+
     }
 
-    
 }

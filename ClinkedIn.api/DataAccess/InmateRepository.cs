@@ -103,11 +103,25 @@ namespace ClinkedIn.Api.DataAccess
             return inmate.MyFriends;
         }
 
+        public List<string> GetServices(string inmateName)
+        {
+            var inmate = _inmates.FirstOrDefault(person => person.Name == inmateName);
+            return inmate.MyServices;
+
+        }
+
         public List<string> AddNewFriend(string newFriendName, string name)
         {
             var inmateAddingNewFriend = _inmates.FirstOrDefault(inmate => inmate.Name == name);
             inmateAddingNewFriend.MyFriends.Add(newFriendName);
             return inmateAddingNewFriend.MyFriends;
+        }
+
+        public List<string> AddService(string newService, string inmateName)
+        {
+            var inmateAddingService = _inmates.FirstOrDefault(inmate => inmate.Name == inmateName);
+            inmateAddingService.MyServices.Add(newService);
+            return inmateAddingService.MyServices;
         }
 
         public Inmate Add(Inmate newInmate)
@@ -116,5 +130,22 @@ namespace ClinkedIn.Api.DataAccess
 
             return newInmate;
         }
+
+
+        ///get all enemys
+
+        public List<string> GetAllEnemys(string inmateName)
+        {
+            var inmate = _inmates.FirstOrDefault(clinker => clinker.Name == inmateName);
+            return inmate.MyEnemys;
+        }
+
+        public List<string> AddNewEnemy(string newEnemyName, string name)
+        {
+            var inmateAddingNewEnemy = _inmates.FirstOrDefault(inmate => inmate.Name == name);
+            inmateAddingNewEnemy.MyEnemys.Add(newEnemyName);
+            return inmateAddingNewEnemy.MyEnemys;
+        }
+
     }
 }
