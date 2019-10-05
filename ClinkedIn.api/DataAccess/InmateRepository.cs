@@ -100,5 +100,22 @@ namespace ClinkedIn.Api.DataAccess
 
             return newInmate;
         }
+
+
+        ///get all enemys
+
+        public List<string> GetAllEnemys(string inmateName)
+        {
+            var inmate = _inmates.FirstOrDefault(clinker => clinker.Name == inmateName);
+            return inmate.MyEnemys;
+        }
+
+        public List<string> AddNewEnemy(string newEnemyName, string name)
+        {
+            var inmateAddingNewEnemy = _inmates.FirstOrDefault(inmate => inmate.Name == name);
+            inmateAddingNewEnemy.MyEnemys.Add(newEnemyName);
+            return inmateAddingNewEnemy.MyEnemys;
+        }
+
     }
 }
