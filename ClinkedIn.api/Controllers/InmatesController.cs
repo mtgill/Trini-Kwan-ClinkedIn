@@ -66,7 +66,7 @@ namespace ClinkedIn.Api.Controllers
         }
 
         // Start of AddFriend 
-        [HttpPost("{name}/friends")] 
+        [HttpPost("{name}/friends")]
         public IActionResult AddNewFriend(AddFriendCommand friendToAdd, string name)
         {
             var repo = new InmateRepository();
@@ -77,12 +77,23 @@ namespace ClinkedIn.Api.Controllers
             return Created($"api/inmates/{friendToAdd.Name}", friendToAdd);
         }
 
-        // Returns a list of inmates friend's friends
-        [HttpGet("{MyFriend}/friends")]
-        public ActionResult<IEnumerable<string>> GetMyFriendFriends(string MyFriend)
+       // gets their friend's friends
+        [HttpGet("{myFriend}/theirFriendsFriends")]
+        public ActionResult<IEnumerable<string>> GetMyFriendFriends(string myFriend)
         {
             var inmateRepo = new InmateRepository();
-            var friends = inmateRepo.GetFriends(MyFriend);
+            var friends = inmateRepo.GetFriends(myFriend);
+            return Ok(friends);
+        }
+
+        // builds and add the crew to their friend list
+        [HttpPut("{name}/addCrew")]
+        public ActionResult<IEnumerable<string>> BuildCrew(BuildCrewCommand crewToAdd, string name)
+        {
+            var repo = new InmateRepository();
+            _ = new List<string>();
+            List<string> myCrew = crewToAdd.MyFriends;
+            var friends = repo.AddCrew(myCrew, name);
             return Ok(friends);
         }
 
