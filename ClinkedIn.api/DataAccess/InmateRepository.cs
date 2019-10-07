@@ -22,7 +22,7 @@ namespace ClinkedIn.Api.DataAccess
                 CriminalInterest = CriminalInterest.Murder,
                 ReleaseDate = new DateTime(2030, 04, 20),
                 MyServices = new List<string>{"Phone calls", "Internet data", "Cash transfer"},
-                MyFriends = new List<string>{"Adam", "Martin", "Emily"}
+                MyFriends = new List<string>{"Tony Stark", "Emily", "Martin", "Greg"}
             },
             new Inmate
             {
@@ -32,7 +32,7 @@ namespace ClinkedIn.Api.DataAccess
                 CriminalInterest = CriminalInterest.Robbery,
                 ReleaseDate = new DateTime(2025, 06, 15),
                 MyServices = new List<string>{"Extra food", "Plates", "Knives", "Forks"},
-                MyFriends = new List<string>{"Nathan", "Greg", "Matt"}
+                MyFriends = new List<string>{"Joker", "Zoe", "Bruce wayne", "Greg", "Nathan"}
             },
             new Inmate
             {
@@ -42,7 +42,7 @@ namespace ClinkedIn.Api.DataAccess
                 CriminalInterest = CriminalInterest.Assault,
                 ReleaseDate = new DateTime(2050, 03, 05),
                 MyServices = new List<string>{"Killing", "Ropes", "Belts", "Weapons"},
-                MyFriends = new List<string>{"Mark", "Nathan", "Matt"}
+                MyFriends = new List<string>{"Mark", "Tchalla", "Matt", "Adam", "Greg"}
             },
             new Inmate
             {
@@ -52,7 +52,7 @@ namespace ClinkedIn.Api.DataAccess
                 CriminalInterest = CriminalInterest.Robbery,
                 ReleaseDate = new DateTime(2022, 08, 22),
                 MyServices = new List<string>{"Alcohol", "Weed", "Cigarettes", "Drugs"},
-                MyFriends = new List<string>{"Adam", "Martin", "Nathan", "Mark", "Emily"}
+                MyFriends = new List<string>{"Wanda maximoff", "Martin", "Mark", "Nathan"}
             },
 
         };
@@ -84,31 +84,41 @@ namespace ClinkedIn.Api.DataAccess
             return inmate;
         }
 
-        //This functions loops through the inmates field and searches for the friend,
-        //then it returns a list of that friend's friends
-        internal List<IEnumerable> GetFriends(string friendName)
+        // Get their friend's friends
+        public List<IEnumerable> GetFriends(string friendName)
         {
             var friendFriends = new List<IEnumerable>();
-           foreach( var inmate in _inmates)
+            var uniqueFriends = new List<IEnumerable>();
+            var myFriends = GetAllFriends(friendName);
+            foreach(var friend in myFriends)
             {
-                foreach(var friend in inmate.MyFriends)
+                foreach(var inmate in _inmates)
                 {
-                    if (inmate.MyFriends.Contains(friendName))
+                    if(friend == inmate.Name)
                     {
-                        var myFriendFriends = _inmates.Where(s => s.Name == friendName).Select(z => z.MyFriends);
-                        friendFriends.Add(myFriendFriends);
-                        break;
+                        friendFriends.AddRange(inmate.MyFriends);
+                        uniqueFriends = friendFriends.Distinct().ToList();
                     }
-                    break;
                 }
-                break;
             }
-            return friendFriends;
+            
+            return uniqueFriends;
+        }
+
+        // Builds crew by adding to friend's list 
+        internal List<string> AddCrew(List<string> crew, string name)
+        {
+            var inmateBuildingCrew = new Inmate();
+            inmateBuildingCrew = _inmates.FirstOrDefault(inmate => inmate.Name == name);
+            inmateBuildingCrew.MyFriends.AddRange(crew);
+            return inmateBuildingCrew.MyFriends.Distinct().ToList();
+            
         }
 
         public List<string> GetAllFriends(string inmateName)
         {
-            var inmate = _inmates.FirstOrDefault(clinker => clinker.Name == inmateName);
+            var inmate = new Inmate();
+            inmate = _inmates.FirstOrDefault(clinker => clinker.Name == inmateName);
             return inmate.MyFriends;
         }
 
