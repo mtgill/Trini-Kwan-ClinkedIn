@@ -143,6 +143,13 @@ namespace ClinkedIn.Api.DataAccess
             return inmateAddingService.MyServices;
         }
 
+        internal Enum UpdateInterest(string name, CriminalInterest criminalInterest)
+        {
+            var inmateToUpdate = _inmates.FirstOrDefault(inmate => inmate.Name == name);
+            inmateToUpdate.CriminalInterest = criminalInterest;
+            return inmateToUpdate.CriminalInterest;
+        }
+
         public Inmate Add(Inmate newInmate)
         {
             _inmates.Add(newInmate);
