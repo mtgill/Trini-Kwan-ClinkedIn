@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using ClinkedIn.Api.DataAccess;
 using ClinkedIn.Api.Models;
@@ -76,6 +79,7 @@ namespace ClinkedIn.Api.Controllers
             var inmateRepo = new InmateRepository();
             var friends = inmateRepo.GetFriends(MyFriend);
             return Ok(friends);
+        }
 
         [HttpGet("{inmateName}/services")]
         public ActionResult<List<string>> GetServicesByInmate(string inmateName)
@@ -117,6 +121,19 @@ namespace ClinkedIn.Api.Controllers
             return Created($"api/inmates/{enemyToAdd.Name}", enemyToAdd);
         }
 
+        //remove interest or services
+        
+        [HttpDelete("{name}/RemoveServices/{serviceToRemove}")]
+        public IActionResult DeleteInmateInfo(string name, string serviceToRemove)
+        {
+           
+            var repo = new InmateRepository();
+            repo.Remove(name, serviceToRemove);
+            
+            return Ok();
+            
+        }
+        }
+
     }
 
-}

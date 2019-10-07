@@ -75,6 +75,12 @@ namespace ClinkedIn.Api.DataAccess
             return inmate;
         }
 
+        public void Remove(string name, string serviceToRemove)
+        {
+            var inmate = _inmates.FirstOrDefault(t => t.Name == name);
+            inmate.MyServices.Remove(serviceToRemove);
+        }
+
         //This functions loops through the inmates field and searches for the friend,
         //then it returns a list of that friend's friends
         internal List<IEnumerable> GetFriends(string friendName)
