@@ -137,6 +137,26 @@ namespace ClinkedIn.Api.Controllers
             return Created($"api/inmates/{enemyToAdd.Name}", enemyToAdd);
         }
 
+        // Start of Update Criminal Interest
+        [HttpPut("{name}/updateInterests")]
+        public IActionResult UpdateInterests(string name, UpdateInterestCommand newInterest)
+        {
+            var repo = new InmateRepository();
+           var newCriminalInterest = repo.UpdateInterest(name, newInterest.CriminalInterest);
+            return Ok(newCriminalInterest);
+
+        }
+
+        [HttpPut("{name}/updateServices/{serviceToUpdate}")]
+        public IEnumerable<Inmate> UpdateServices(string name, string serviceToUpdate, UpdateServiceCommand newService)
+        {
+            var repo = new InmateRepository();
+            var services = repo.UpdateService(name, serviceToUpdate, newService);
+            var allInmates = repo.GetAll();
+
+            return allInmates;
+        }
+
     }
 
 }
